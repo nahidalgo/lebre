@@ -39,5 +39,25 @@ public class PlayerMovement : MonoBehaviour {
 			// Debug.Log(m_timePressed);
 			
 		}
+
+		if(Input.touchCount > 0)
+		{
+			Touch touch = Input.GetTouch(0);
+			if(touch.position.x > Screen.width/2){
+				if(touch.phase == TouchPhase.Began)
+				{
+					startTime = Time.time;
+				}
+				if(touch.phase == TouchPhase.Ended)
+				{
+					m_timePressed = Time.time - startTime;
+
+					if(m_timePressed < 1 && m_timePressed > 0)
+						m_timePressed = 1;
+					else if (m_timePressed >= 3)
+						m_timePressed = 0f;
+				}
+			}
+		}
 	}
 }
